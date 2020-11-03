@@ -6,7 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="pro-frames" />
+        <module name="pro-doris" />
+        <module name="pro-flink" />
+        <module name="warehouse" />
+        <module name="sparkstreamin" />
+        <module name="pro-es" />
+        <module name="pro-kudu" />
       </profile>
     </annotationProcessing>
   </component>
