@@ -6,13 +6,26 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="pro-doris" />
+        <module name="gmall-mock" />
+        <module name="gmall-realtime" />
         <module name="pro-flink" />
+        <module name="gmall-common" />
+        <module name="source-spark" />
+        <module name="pro-doris" />
+        <module name="data-flume" />
         <module name="warehouse" />
         <module name="sparkstreamin" />
+        <module name="spark" />
         <module name="pro-es" />
+        <module name="gmall-canal" />
         <module name="pro-kudu" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="gmall-mock" target="1.5" />
+      <module name="pro-source" target="1.5" />
+      <module name="source-flink" target="1.5" />
+      <module name="source-spark" target="1.5" />
+    </bytecodeTargetLevel>
   </component>
 </project>
