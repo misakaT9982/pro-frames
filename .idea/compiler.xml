@@ -7,17 +7,16 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="gmall-mock" />
-        <module name="gmall-realtime" />
+        <module name="data-flume" />
         <module name="pro-flink" />
         <module name="gmall-common" />
-        <module name="source-spark" />
         <module name="pro-doris" />
-        <module name="data-flume" />
-        <module name="warehouse" />
+        <module name="gmall-realtime" />
         <module name="sparkstreamin" />
         <module name="spark" />
         <module name="pro-es" />
         <module name="gmall-canal" />
+        <module name="warehouse" />
         <module name="pro-kudu" />
       </profile>
     </annotationProcessing>
