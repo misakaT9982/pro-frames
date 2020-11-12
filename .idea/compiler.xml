@@ -10,10 +10,10 @@
         <module name="data-flume" />
         <module name="pro-flink" />
         <module name="gmall-common" />
+        <module name="spark" />
         <module name="pro-doris" />
         <module name="gmall-realtime" />
         <module name="sparkstreamin" />
-        <module name="spark" />
         <module name="pro-es" />
         <module name="gmall-canal" />
         <module name="warehouse" />
