@@ -1,19 +1,21 @@
-package com.flink.sql.api
+package com.flink.sql.functions
 
 import com.flink.sql.bean.SensorReading
-import com.flink.sql.util.HashCode
+import com.flink.sql.util.TableAgg
 import org.apache.flink.streaming.api.TimeCharacteristic
 import org.apache.flink.streaming.api.functions.timestamps.BoundedOutOfOrdernessTimestampExtractor
 import org.apache.flink.streaming.api.scala._
 import org.apache.flink.streaming.api.windowing.time.Time
+import org.apache.flink.table.api.Table
 import org.apache.flink.table.api.scala._
+import org.apache.flink.types.Row
 
 /**
  * Ciel
- * pro-frames: com.flink.sql.api
- * 2020-11-08 15:48:37
+ * pro-frames: com.flink.sql.functions
+ * 2020-11-14 17:04:47
  */
-object FlinkSQLSalarFunctions extends App {
+object FlinkSQLTableAggFunction extends App {
     val env: StreamExecutionEnvironment = StreamExecutionEnvironment.getExecutionEnvironment
     env.setParallelism(1)
     env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime)
@@ -32,9 +34,17 @@ object FlinkSQLSalarFunctions extends App {
     // 处理时间最加preceding
     //val sensorTable = tableEnv.fromDataStream(dataStream, 'id, 'temperature, 'timestamp, 'pt.proctime)
     // rowtime追加事件事件
-    val sensorTable = tableEnv.fromDataStream(dataStream, 'id, 'temperature, 'timestamp.rowtime as 'ts)
-    val hasCode: HashCode = new HashCode(10)
+    val sensorTable: Table = tableEnv.fromDataStream(dataStream, 'id, 'temperature, 'timestamp.rowtime as 'ts)
 
-    env.execute
+    val tableAgg = new TableAgg()
 
+    //
+    val resultTable = sensorTable
+        .groupBy('id)
+        .flatAggregate(tableAgg('temperature) as ('temp, 'rank))
+        .select('id, 'temp, 'rank)
+
+    resultTable.toRetractStream[Row].print("reuslt")
+
+    env.execute()
 }

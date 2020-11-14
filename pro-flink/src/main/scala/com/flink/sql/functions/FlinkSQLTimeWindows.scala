@@ -1,11 +1,11 @@
-package com.flink.sql.api
+package com.flink.sql.functions
 
 import com.flink.sql.bean.SensorReading
 import org.apache.flink.streaming.api.functions.timestamps.BoundedOutOfOrdernessTimestampExtractor
 import org.apache.flink.streaming.api.scala._
 import org.apache.flink.streaming.api.windowing.time.Time
-import org.apache.flink.table.api.{Over, Table, Tumble}
 import org.apache.flink.table.api.scala._
+import org.apache.flink.table.api.{Over, Table, Tumble}
 import org.apache.flink.types.Row
 
 /**
