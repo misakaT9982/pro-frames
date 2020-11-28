@@ -20,9 +20,9 @@ object FlinkSQLAggFunction extends App {
     env.setParallelism(1)
     env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime)
     val tableEnv: StreamTableEnvironment = StreamTableEnvironment.create(env)
-    val fileStream = env.readTextFile("D:\\worksapce\\bigdata\\project-flink\\flink-lessons\\src\\main\\resources\\sensor.txt")
-    val dataStream = fileStream.map(data => {
-        val datas = data.split(",")
+    val fileStream: DataStream[String] = env.readTextFile("D:\\worksapce\\bigdata\\project-flink\\flink-lessons\\src\\main\\resources\\sensor.txt")
+    val dataStream: DataStream[SensorReading] = fileStream.map(data => {
+        val datas: Array[String] = data.split(",")
         SensorReading(datas(0), datas(1).toLong, datas(2).toDouble)
     })
       .assignTimestampsAndWatermarks(
@@ -44,11 +44,9 @@ object FlinkSQLAggFunction extends App {
       .aggregate(avgTmp('temperature) as 'avgTemp)
       .select('id, 'avgTemp)
 
-
     // SQL
     tableEnv.createTemporaryView("sensor", sensorTable)
     tableEnv.registerFunction("avgTemp", avgTmp)
-
 
     resultTable.toRetractStream[Row].print("result")
 

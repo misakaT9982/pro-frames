@@ -20,7 +20,7 @@ object FlinkSQLTableAggFunction extends App {
     env.setParallelism(1)
     env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime)
     val tableEnv: StreamTableEnvironment = StreamTableEnvironment.create(env)
-    val fileStream = env.readTextFile("D:\\worksapce\\bigdata\\project-flink\\flink-lessons\\src\\main\\resources\\sensor.txt")
+    val fileStream: DataStream[String] = env.readTextFile("D:\\worksapce\\bigdata\\project-flink\\flink-lessons\\src\\main\\resources\\sensor.txt")
     val dataStream = fileStream.map(data => {
         val datas = data.split(",")
         SensorReading(datas(0), datas(1).toLong, datas(2).toDouble)
